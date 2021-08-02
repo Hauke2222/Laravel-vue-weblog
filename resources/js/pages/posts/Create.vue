@@ -1,6 +1,6 @@
 <template>
     <div class="card-body">
-        <form>
+        <form v-on:submit.prevent="submit">
             <div class="form-group">
                 <label for="title">Titel</label>
                 <input
@@ -8,12 +8,19 @@
                     class="form-control"
                     name="title"
                     id="title"
+                    v-model="fields.title"
                 />
             </div>
 
             <div class="form-group">
                 <label for="date">Datum</label>
-                <input type="date" class="form-control" name="date" id="date" />
+                <input
+                    type="date"
+                    class="form-control"
+                    name="date"
+                    id="date"
+                    v-model="fields.date"
+                />
             </div>
 
             <div class="form-group">
@@ -23,6 +30,7 @@
                     class="form-control"
                     name="author"
                     id="author"
+                    v-model="fields.author"
                 />
             </div>
 
@@ -33,6 +41,7 @@
                     name="content"
                     id="content"
                     rows="5"
+                    v-model="fields.content"
                 ></textarea>
             </div>
 
@@ -41,6 +50,25 @@
     </div>
 </template>
 
-<script></script>
+<script>
+export default {
+    data() {
+        return {
+            fields: {
+                title: "",
+                date: "",
+                author: "",
+                content: ""
+            },
+            errors: {}
+        };
+    },
+    methods: {
+        submit() {
+            this.$store.dispatch("createPost", this.fields);
+        }
+    }
+};
+</script>
 
 <style></style>

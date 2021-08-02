@@ -1,8 +1,24 @@
 <template>
     <div>
-        <div v-for="(p, index) in posts" :key="index">
-            {{ p.title + ": " + p.content + " " + p.date }}
-        </div>
+        <ul id="cardList" v-for="(p, index) in posts" :key="index">
+            <br />
+            <div class="center">
+                <div class="card">
+                    <li class="card-li">
+                        <a href="">
+                            <div class="post-card-img">
+                                <img :src="''" class="post-card-img" />
+                            </div>
+                            <div class="post-card-title">{{ p.title }}</div>
+                            <div class="post-card-author-date">
+                                {{ p.author + p.date }}
+                            </div>
+                        </a>
+                    </li>
+                </div>
+            </div>
+            <br />
+        </ul>
     </div>
 </template>
 
@@ -18,3 +34,4 @@ export default {
     }
 };
 </script>
+<style></style>

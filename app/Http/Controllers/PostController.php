@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Http\Requests\StorePost;
 
 class PostController extends Controller
 {
@@ -28,6 +29,9 @@ class PostController extends Controller
     {
         $validated = $request->validated();
         Post::create($validated);
+        return response()->json([
+            'posts' => Post::all(),
+        ]);
     }
 
     /**
