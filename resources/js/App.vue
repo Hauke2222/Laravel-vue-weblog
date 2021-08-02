@@ -19,7 +19,7 @@
 export default {
     data() {
         return {
-            message: "Laravel vue wepost"
+            message: "Laravel vue weblog"
         };
     }
 };
