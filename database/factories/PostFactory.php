@@ -25,7 +25,8 @@ class PostFactory extends Factory
     {
         $contents = file_get_contents('https://source.unsplash.com/1600x900/?nature,forrest?'.rand(0,999));
         $randomNumber = time();
-        $path = 'public/images/file_'.$randomNumber.'.jpg';
+        $fileName = 'file_'.$randomNumber.'.jpg';
+        $path = 'public/images/'.$fileName;
         Storage::put($path, $contents);
 
         return [
@@ -35,7 +36,7 @@ class PostFactory extends Factory
             'content' => 'test',
             'premium' => false,
             'user_id' => \App\Models\User::all()->random()->id,
-            'image' => $path,
+            'image' => '../storage/images/'.$fileName,
         ];
     }
 }

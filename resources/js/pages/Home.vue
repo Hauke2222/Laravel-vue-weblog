@@ -5,9 +5,12 @@
             <div class="center">
                 <div class="card">
                     <li class="card-li">
-                        <a href="">
+                        <a href="#/show">
                             <div class="post-card-img">
-                                <img :src="''" class="post-card-img" />
+                                <img
+                                    v-bind:src="p.image"
+                                    class="post-card-img"
+                                />
                             </div>
                             <div class="post-card-title">{{ p.title }}</div>
                             <div class="post-card-author-date">

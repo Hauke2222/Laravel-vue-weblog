@@ -24,6 +24,9 @@ export default new Vuex.Store({
                 commit("SET_POSTS", response.data.posts);
             });
         },
+        getOnePost({ commit }) {
+            axios.get("");
+        },
         createPost({ commit }, payload) {
             axios.post("api/posts", payload).then(response => {
                 commit("SET_POSTS", response.data.posts);
