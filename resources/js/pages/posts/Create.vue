@@ -45,6 +45,11 @@
                 ></textarea>
             </div>
 
+            <div class="form-group">
+                <label for="image"></label>
+                <input type="file" name="image" />
+            </div>
+
             <button type="submit" class="btn btn-primary">Send</button>
         </form>
     </div>

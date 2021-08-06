@@ -11,15 +11,17 @@ export default new VueRouter({
     routes: [
         {
             path: "/",
-            component: Home
+            component: Home,
+            name: "Home"
         },
         {
             path: "/create",
             component: Create
         },
         {
-            path: "/show",
-            component: Show
+            path: "/show/:postId",
+            component: Show,
+            name: "Show"
         }
     ]
 });
