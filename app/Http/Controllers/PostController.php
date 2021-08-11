@@ -28,10 +28,9 @@ class PostController extends Controller
     public function store(StorePost $request)
     {
         $validated = $request->validated();
-        //dd($validated);
         if ($validated['image'] = $request->has('image')){
-            $validated['image'] = $request->file('image')->store('public/images');
-            dd($request);
+            $validated['image'] = $request->file('image')->store('public/images/');
+            $validated['image'] = '../storage/images/' . substr($validated['image'], 15);
         }
 
         return Post::create($validated);

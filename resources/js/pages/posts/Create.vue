@@ -47,7 +47,7 @@
 
             <div class="form-group">
                 <label for="image"></label>
-                <input type="file" name="image" />
+                <input type="file" name="image" @change="saveImg" />
             </div>
 
             <button type="submit" class="btn btn-primary">Send</button>
@@ -63,14 +63,24 @@ export default {
                 title: "",
                 date: "",
                 author: "",
-                content: ""
+                content: "",
+                image: ""
             },
             errors: {}
         };
     },
     methods: {
         submit() {
-            this.$store.dispatch("createPost", this.fields);
+            const formData = new FormData();
+            formData.append("image", this.fields.image);
+            formData.append("title", this.fields.title);
+            formData.append("date", this.fields.date);
+            formData.append("author", this.fields.author);
+            formData.append("content", this.fields.content);
+            this.$store.dispatch("createPost", formData);
+        },
+        saveImg(event) {
+            this.fields.image = event.target.files[0];
         }
     }
 };
