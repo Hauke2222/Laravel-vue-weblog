@@ -9,11 +9,15 @@ import store from "./store";
 //Import router
 import router from "./router";
 
-import '../css/app.scss'
+import "../css/app.scss";
+
+require("./bootstrap");
+
+require("alpinejs");
 
 new Vue({
     el: "#app",
     store,
     router,
-    render: (h) => h(App),
+    render: h => h(App)
 });
