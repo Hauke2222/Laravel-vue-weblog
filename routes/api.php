@@ -16,6 +16,7 @@ use App\Http\Controllers\PostController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    dd("test");
     return $request->user();
 });
 

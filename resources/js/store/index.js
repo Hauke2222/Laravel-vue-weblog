@@ -35,6 +35,12 @@ export default new Vuex.Store({
                 router.push({ name: "Home" });
             });
         }
+        /*login({ commit }, payload) {
+            axios.post("login", { payload}).then(response => {
+                console.log(response.data);
+                //router.push({ name: "Home" });
+            });
+        }*/
     },
     getters: {
         getPosts(state) {
