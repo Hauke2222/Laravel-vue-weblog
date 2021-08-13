@@ -6,6 +6,9 @@
                 <li>
                     <a href="#/create">Create</a>
                 </li>
+                <li>
+                    <router-link :to="{ name: 'Login' }">Login!</router-link>
+                </li>
             </ul>
         </nav>
         <div>

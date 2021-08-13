@@ -4,6 +4,8 @@ import VueRouter from "vue-router";
 import Home from "../pages/Home.vue";
 import Create from "../pages/posts/Create.vue";
 import Show from "../pages/posts/Show.vue";
+import Login from "../pages/Login.vue";
+
 
 Vue.use(VueRouter);
 
@@ -22,6 +24,11 @@ export default new VueRouter({
             path: "/show/:postId",
             component: Show,
             name: "Show"
-        }
+        },
+        {
+            path: "/login",
+            component: Login,
+            name: "Login"
+        },
     ]
 });
