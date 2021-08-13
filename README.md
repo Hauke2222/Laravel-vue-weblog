@@ -37,3 +37,14 @@ Run in another terminal the laravel development server:
 ```sh
 php artisan serve
 ```
+
+### Info on Laravel Sanctun authenitcation
+
+https://dev.to/nicolus/laravel-sanctum-explained-spa-authentication-45g1
+
+* Ensure your SESSION_DOMAIN is set to localhost or your host without port
+* SANCTUM_STATEFUL_DOMAIN is set to your sub domain/SPA IP with the port e.g localhost:8000
+
+### Info on Laravel and Fortify authentication scaffolding
+
+https://redfern.dev/articles/authentication-laravel-sanctum-fortify-for-an-spa/
