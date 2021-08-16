@@ -16,8 +16,8 @@ use App\Http\Controllers\PostController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    dd("test");
-    return $request->user();
+    //dd("test")->header('Content-Type', 'application/json');
+    return $request->user()->header('Content-Type', 'application/json');
 });
 
-Route::resource('posts', PostController::class);
+Route::resource('posts', PostController::class)->middleware('auth:sanctum');

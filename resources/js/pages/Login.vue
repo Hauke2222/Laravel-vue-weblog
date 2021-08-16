@@ -49,7 +49,6 @@ export default {
             const { email, password } = this;
 
             axios.post("login", { email, password }).then(response => {
-                console.log(response.data);
                 router.push({ name: "Home" });
             });
         }
