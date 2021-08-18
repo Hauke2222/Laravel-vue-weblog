@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +17,10 @@ use App\Http\Controllers\PostController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    //dd("test")->header('Content-Type', 'application/json');
+    dd("test");
     return $request->user()->header('Content-Type', 'application/json');
 });
 
-Route::resource('posts', PostController::class)->middleware('auth:sanctum');
+Route::resource('posts', PostController::class);
+
+Route::resource('comments', CommentController::class);

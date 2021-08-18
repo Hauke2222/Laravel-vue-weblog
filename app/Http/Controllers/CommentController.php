@@ -34,7 +34,8 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validated();
+        return Comment::create($validated);
     }
 
     /**

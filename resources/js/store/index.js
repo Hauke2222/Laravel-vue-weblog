@@ -34,6 +34,9 @@ export default new Vuex.Store({
                 commit("SET_POSTS", response.data.posts);
                 router.push({ name: "Home" });
             });
+        },
+        createComment(payload) {
+            axios.post("api/comments", payload);
         }
         /*login({ commit }, payload) {
             axios.post("login", { payload}).then(response => {
