@@ -8,7 +8,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         posts: [],
-        detailPost: []
+        detailPost: [],
+        detailPostComments: [],
+        comments: ""
     },
     mutations: {
         SET_POSTS(state, payload) {
@@ -16,6 +18,12 @@ export default new Vuex.Store({
         },
         SET_DETAIL_POST(state, payload) {
             state.detailPost = payload;
+        },
+        SET_COMMENT(state, payload) {
+            state.comments = payload;
+        },
+        SET_POST_COMMENTS(state, payload) {
+            state.detailPostComments = payload;
         }
     },
     actions: {
@@ -29,14 +37,22 @@ export default new Vuex.Store({
                 commit("SET_DETAIL_POST", response.data);
             });
         },
+        getPostComments({ commit }, postId) {
+            axios.get("api/comments/" + postId).then(response => {
+                commit("SET_POST_COMMENTS", response.data);
+            });
+        },
         createPost({ commit }, payload) {
             axios.post("api/posts", payload).then(response => {
                 commit("SET_POSTS", response.data.posts);
                 router.push({ name: "Home" });
             });
         },
-        createComment(payload) {
-            axios.post("api/comments", payload);
+        createComment({ commit }, payload) {
+            axios.post("api/comments", payload).then(response => {
+                commit("SET_COMMENT", response.data.comments);
+                router.push({ name: "Home" });
+            });
         }
         /*login({ commit }, payload) {
             axios.post("login", { payload}).then(response => {
@@ -51,6 +67,9 @@ export default new Vuex.Store({
         },
         getOnePost(state) {
             return state.detailPost;
+        },
+        getPostComments(state) {
+            return state.detailPostComments;
         }
     }
 });

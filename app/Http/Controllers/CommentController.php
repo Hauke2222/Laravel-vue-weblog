@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comment;
+use App\Http\Requests\StoreComment;
 
 class CommentController extends Controller
 {
@@ -14,6 +16,9 @@ class CommentController extends Controller
     public function index()
     {
         //
+        return response()->json([
+            'comments' => Comment::all(),
+        ]);
     }
 
     /**
@@ -32,10 +37,14 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreComment $request)
     {
         $validated = $request->validated();
+        //dd($validated);
         return Comment::create($validated);
+        // return response()->json([
+        //     'posts' => Post::all(),
+        // ]);
     }
 
     /**
