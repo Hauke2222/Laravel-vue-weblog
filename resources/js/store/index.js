@@ -10,7 +10,7 @@ export default new Vuex.Store({
         posts: [],
         detailPost: [],
         detailPostComments: [],
-        comments: ""
+        comments: []
     },
     mutations: {
         SET_POSTS(state, payload) {
@@ -35,11 +35,6 @@ export default new Vuex.Store({
         getOnePost({ commit }, postId) {
             axios.get("api/posts/" + postId).then(response => {
                 commit("SET_DETAIL_POST", response.data);
-            });
-        },
-        getPostComments({ commit }, postId) {
-            axios.get("api/comments/" + postId).then(response => {
-                commit("SET_POST_COMMENTS", response.data);
             });
         },
         createPost({ commit }, payload) {
@@ -67,9 +62,6 @@ export default new Vuex.Store({
         },
         getOnePost(state) {
             return state.detailPost;
-        },
-        getPostComments(state) {
-            return state.detailPostComments;
         }
     }
 });

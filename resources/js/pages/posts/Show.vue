@@ -7,9 +7,9 @@
             <img v-bind:src="p.image" class="responsive-img" />
             <p>{{ p.content }}</p>
         </div>
-        <div v-for="(c, index) in comments" :key="index">
+        <!-- <div v-for="(c, index) in comments" :key="index">
             comment: {{ c.comment }}
-        </div>
+        </div> -->
         <form v-on:submit.prevent="submit">
             <div class="form-group">
                 <label for="content">Comment:</label>
@@ -33,14 +33,10 @@ export default {
     computed: {
         post() {
             return this.$store.getters.getOnePost;
-        },
-        comments() {
-            return this.$store.getters.getPostComments;
         }
     },
     mounted() {
         this.$store.dispatch("getOnePost", this.$route.params.postId);
-        this.$store.dispatch("getPostComments", this.$route.params.postId);
     },
     data() {
         return {
