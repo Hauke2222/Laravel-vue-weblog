@@ -7,7 +7,10 @@
                     <a href="#/create">Create</a>
                 </li>
                 <li>
-                    <router-link :to="{ name: 'Login' }">Login!</router-link>
+                    <router-link :to="{ name: 'Login' }">Login</router-link>
+                </li>
+                <li>
+                    <a href="#" @click.prevent="logout">Logout</a>
                 </li>
             </ul>
         </nav>
@@ -19,11 +22,23 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     data() {
         return {
             message: "Laravel vue weblog"
         };
+    },
+    methods:
+    {
+        logout()
+        {
+            axios.post("logout").then(response => {
+                console.log(response);
+                //router.push({ name: "Home" });
+            });
+        },
     }
 };
 </script>
