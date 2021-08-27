@@ -2,6 +2,10 @@
     <div>
         <h2>Login</h2>
 
+        <div>Login response: {{ loginResponse }}</div>
+
+        <div>GET api/user response: {{ userResponse }}</div>
+
         <form @submit.prevent="handleSubmit">
             <div class="form-group">
                 <label for="username">Email address</label>
@@ -35,22 +39,38 @@
 <script>
 import axios from "axios";
 import router from "../router";
+
 export default {
     data() {
         return {
             email: "",
             password: "",
-            submitted: false
+            submitted: false,
+            loginResponse: "",
+            userResponse: ""
         };
     },
+    created() {
+        this.getUser();
+    },
     methods: {
+        getUser() {
+            axios.get("api/user").then(response => {
+                this.userResponse = response;
+            });
+        },
         handleSubmit() {
             this.submitted = true;
             const { email, password } = this;
 
-            axios.post("login", { email, password }).then(response => {
-                router.push({ name: "Home" });
-            });
+            axios
+                .post("login", { email, password })
+                .then(response => {
+                    router.push({ name: "Home" });
+                })
+                .catch(error => {
+                    this.loginResponse = error;
+                });
         }
     }
 };

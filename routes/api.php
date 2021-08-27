@@ -17,8 +17,8 @@ use App\Http\Controllers\CommentController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    dd("test");
-    return $request->user()->header('Content-Type', 'application/json');
+    dd("Authenticated!");
+    return $request->user();
 });
 
 Route::resource('posts', PostController::class);
