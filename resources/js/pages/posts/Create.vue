@@ -33,6 +33,11 @@
                     v-model="fields.author"
                 />
             </div>
+            <div class="form-group">
+                <select name="categories[]" id="categories" multiple>
+                    <option value=""></option>
+                </select>
+            </div>
 
             <div class="form-group">
                 <label for="content">Tekst</label>
@@ -57,6 +62,11 @@
 
 <script>
 export default {
+    computed: {
+        categoriesFromStore() {
+            return this.$store.getters.getCategories;
+        }
+    },
     data() {
         return {
             fields: {
@@ -64,7 +74,8 @@ export default {
                 date: "",
                 author: "",
                 content: "",
-                image: ""
+                image: "",
+                categories: ""
             },
             errors: {}
         };
@@ -82,6 +93,9 @@ export default {
         saveImg(event) {
             this.fields.image = event.target.files[0];
         }
+    },
+    mounted() {
+        this.$store.dispatch("getCategories");
     }
 };
 </script>

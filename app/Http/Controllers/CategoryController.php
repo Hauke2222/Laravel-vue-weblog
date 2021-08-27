@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
 use App\Models\Category;
-use App\Http\Requests\StorePost;
-use App\Http\Resources\PostResource;
-use App\Http\Resources\CategoryResource;
 
-class PostController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,25 +15,29 @@ class PostController extends Controller
     public function index()
     {
         return response()->json([
-            'posts' => Post::all(),
+            'categories' => Category::all(),
         ]);
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePost $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
-        if ($validated['image'] = $request->has('image')){
-            $validated['image'] = $request->file('image')->store('public/images/');
-            $validated['image'] = '../storage/images/' . substr($validated['image'], 15);
-        }
-
-        return Post::create($validated)->categories()->sync($request->categories);
-
+        //
     }
 
     /**
@@ -46,11 +46,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        return response()->json([
-            'post' => new PostResource($post),
-        ]);
+        //
     }
 
     /**
