@@ -19,7 +19,7 @@ class PostController extends Controller
     public function index()
     {
         return response()->json([
-            'posts' => Post::all(),
+            'posts' => PostResource::collection(Post::all()),
         ]);
     }
     /**
@@ -35,9 +35,11 @@ class PostController extends Controller
             $validated['image'] = $request->file('image')->store('public/images/');
             $validated['image'] = '../storage/images/' . substr($validated['image'], 15);
         }
-
-        return Post::create($validated)->categories()->sync($request->categories);
-
+        //dd($request->categories);
+        //dd(Post::create($validated)->categories()->sync($request->categories));
+        $post = Post::create($validated);
+        $post->categories()->sync($request->categories);
+        return $post;
     }
 
     /**

@@ -18,6 +18,7 @@
                                 />
                             </div>
                             <div class="post-card-title">{{ p.title }}</div>
+                            <div>{{ p.categories }}</div>
                             <div class="post-card-author-date">
                                 {{ p.author + p.date }}
                             </div>

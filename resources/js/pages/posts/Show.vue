@@ -6,6 +6,7 @@
             <h4>Author: {{ p.author }}</h4>
             <img v-bind:src="p.image" class="responsive-img" />
             <p>{{ p.content }}</p>
+            <p>Comments:{{ p.comments }}</p>
         </div>
         <!-- <div v-for="(c, index) in comments" :key="index">
             comment: {{ c.comment }}

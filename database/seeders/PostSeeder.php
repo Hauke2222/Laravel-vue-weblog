@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Post;
+use App\Models\Category;
 
 class PostSeeder extends Seeder
 {
@@ -14,6 +15,8 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        Post::factory()->count(10)->create();
+        Post::factory()->count(10)->create()->each(function ($post) {
+            $post->categories()->sync(Category::all()->first()->id);
+        });
     }
 }

@@ -9,9 +9,9 @@ class Category extends Model
 {
     use HasFactory;
 
-    public function blog()
+    public function post()
     {
-        return $this->belongsToMany('App\Models\Post', 'categories_post', 'post_id', 'category_id');
+        return $this->belongsToMany('App\Models\Post', 'post_categories');
     }
 
     protected $table = 'categories';

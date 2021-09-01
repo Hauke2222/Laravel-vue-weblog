@@ -34,8 +34,18 @@
                 />
             </div>
             <div class="form-group">
-                <select name="categories[]" id="categories" multiple>
-                    <option value=""></option>
+                <select
+                    v-model="fields.categories"
+                    name="categories[]"
+                    id="categories"
+                    multiple
+                >
+                    <option
+                        v-for="(c, index) in categoriesFromStore"
+                        :key="index"
+                        v-bind:value="c.id"
+                        >{{ c.name }}</option
+                    >
                 </select>
             </div>
 
@@ -75,7 +85,7 @@ export default {
                 author: "",
                 content: "",
                 image: "",
-                categories: ""
+                categories: []
             },
             errors: {}
         };
@@ -88,6 +98,7 @@ export default {
             formData.append("date", this.fields.date);
             formData.append("author", this.fields.author);
             formData.append("content", this.fields.content);
+            formData.append("categories", this.fields.categories);
             this.$store.dispatch("createPost", formData);
         },
         saveImg(event) {
