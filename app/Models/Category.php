@@ -11,7 +11,7 @@ class Category extends Model
 
     public function post()
     {
-        return $this->belongsToMany('App\Models\Post', 'post_categories');
+        return $this->belongsToMany('Post::class');
     }
 
     protected $table = 'categories';

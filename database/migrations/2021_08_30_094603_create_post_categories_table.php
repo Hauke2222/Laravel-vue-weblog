@@ -13,7 +13,7 @@ class CreatePostCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_categories', function (Blueprint $table) {
+        Schema::create('category_post', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('post_id')->unsigned();
             $table->bigInteger('category_id')->unsigned();
