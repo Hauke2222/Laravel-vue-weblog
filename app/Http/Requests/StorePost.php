@@ -16,6 +16,11 @@ class StorePost extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge(['categories' => explode(',', $this->categories)]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -30,6 +35,7 @@ class StorePost extends FormRequest
             'content' => 'required',
             'premium' => 'nullable',
             'image' => 'mimes:jpeg,bmp,png|max:2000',
+            'categories' => 'array'
             //'user_id' => 'required',
         ];
     }

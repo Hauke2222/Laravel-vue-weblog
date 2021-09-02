@@ -30,12 +30,13 @@ class PostController extends Controller
      */
     public function store(StorePost $request)
     {
+        // dd($request->categories);
         $validated = $request->validated();
         if ($validated['image'] = $request->has('image')){
             $validated['image'] = $request->file('image')->store('public/images/');
             $validated['image'] = '../storage/images/' . substr($validated['image'], 15);
         }
-        //dd($request->categories);
+        // dd($request->categories);
         //dd(Post::create($validated)->categories()->sync($request->categories));
         $post = Post::create($validated);
         $post->categories()->sync($request->categories);
