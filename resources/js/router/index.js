@@ -5,7 +5,7 @@ import Home from "../pages/Home.vue";
 import Create from "../pages/posts/Create.vue";
 import Show from "../pages/posts/Show.vue";
 import Login from "../pages/Login.vue";
-
+import Subscription from "../pages/Subscription.vue";
 
 Vue.use(VueRouter);
 
@@ -30,5 +30,9 @@ export default new VueRouter({
             component: Login,
             name: "Login"
         },
+        {
+            path: "/subscribe",
+            component: Subscription
+        }
     ]
 });

@@ -12,6 +12,9 @@
                 <li>
                     <a href="#" @click.prevent="logout">Logout</a>
                 </li>
+                <li>
+                    <router-link to="/subscribe">Subscribe</router-link>
+                </li>
             </ul>
         </nav>
         <div>
@@ -30,15 +33,13 @@ export default {
             message: "Laravel vue weblog"
         };
     },
-    methods:
-    {
-        logout()
-        {
+    methods: {
+        logout() {
             axios.post("logout").then(response => {
                 console.log(response);
                 //router.push({ name: "Home" });
             });
-        },
+        }
     }
 };
 </script>

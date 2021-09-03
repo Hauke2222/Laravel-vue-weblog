@@ -11,7 +11,8 @@ export default new Vuex.Store({
         detailPost: [],
         detailPostComments: [],
         comments: [],
-        categories: []
+        categories: [],
+        users: []
     },
     mutations: {
         SET_POSTS(state, payload) {
@@ -28,6 +29,9 @@ export default new Vuex.Store({
         },
         SET_CATEGORIES(state, payload) {
             state.categories = payload;
+        },
+        SET_USER(state, payload) {
+            state.users = payload;
         }
     },
     actions: {
@@ -50,6 +54,12 @@ export default new Vuex.Store({
         createComment({ commit }, payload) {
             axios.post("api/comments", payload).then(response => {
                 commit("SET_COMMENT", response.data.comments);
+                router.push({ name: "Home" });
+            });
+        },
+        updateUser({ commit }, payload) {
+            axios.put("api/users/id", payload).then(response => {
+                commit("SET_USER", response.data.users);
                 router.push({ name: "Home" });
             });
         },

@@ -66,9 +66,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUser $request, User $user)
     {
         //
+        dd($validated);
+        $validated = $request->validated();
+        $validated['premium'] = $request->has('premium');
+        $user->update($validated);
     }
 
     /**
