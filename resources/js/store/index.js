@@ -58,7 +58,7 @@ export default new Vuex.Store({
             });
         },
         updateUser({ commit }, payload) {
-            axios.put("api/users/id", payload).then(response => {
+            axios.put("api/users/12", payload).then(response => {
                 commit("SET_USER", response.data.users);
                 router.push({ name: "Home" });
             });

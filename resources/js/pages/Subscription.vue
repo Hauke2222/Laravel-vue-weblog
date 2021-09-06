@@ -23,10 +23,12 @@
                 />
             </div>
             <div class="form-group">
-                <label for="premium_content_status"
-                    >Premium €2,- (per maand)</label
-                >
-                <input type="checkbox" name="premium" v-model="premium" />
+                <label for="subscription">Premium €2,- (per maand)</label>
+                <input
+                    type="checkbox"
+                    name="subscription"
+                    v-model="subscription"
+                />
             </div>
 
             <div class="form-group">
@@ -45,7 +47,8 @@ export default {
         return {
             email: "",
             name: "",
-            premium: ""
+            subscription: "",
+            user: null
         };
     },
     methods: {
@@ -53,10 +56,17 @@ export default {
             this.$store.dispatch("updateUser", {
                 email: this.email,
                 name: this.name,
-                premium: this.premium
+                subscription: this.subscription
+            });
+        },
+        getUser() {
+            axios.get("api/user").then(response => {
+                console.log(response.body);
+                this.user = response.data;
             });
         }
-    }
+    },
+    mounted: {}
 };
 </script>
 

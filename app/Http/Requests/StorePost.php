@@ -36,7 +36,6 @@ class StorePost extends FormRequest
             'premium' => 'nullable',
             'image' => 'mimes:jpeg,bmp,png|max:2000',
             'categories' => 'array'
-            //'user_id' => 'required',
         ];
     }
 }

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUser;
+use Auth;
 
 class UserController extends Controller
 {
@@ -66,12 +69,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUser $request, User $user)
+    public function update(StoreUser $request)
     {
         //
-        dd($validated);
+        $user = Auth::user();
         $validated = $request->validated();
-        $validated['premium'] = $request->has('premium');
+        $validated['subscription'] = $request->has('subscription');
+        $validated['id'] = Auth::user()->id;
+        //dd($validated);
+        //dd($user);
         $user->update($validated);
     }
 
