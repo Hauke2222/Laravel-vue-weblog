@@ -47,8 +47,7 @@ export default {
         return {
             email: "",
             name: "",
-            subscription: "",
-            user: null
+            subscription: false
         };
     },
     methods: {
@@ -57,12 +56,6 @@ export default {
                 email: this.email,
                 name: this.name,
                 subscription: this.subscription
-            });
-        },
-        getUser() {
-            axios.get("api/user").then(response => {
-                console.log(response.body);
-                this.user = response.data;
             });
         }
     },

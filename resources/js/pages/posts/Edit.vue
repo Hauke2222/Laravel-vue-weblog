@@ -62,7 +62,12 @@
 
             <div class="form-group">
                 <label for="image"></label>
-                <input type="file" name="image" @change="saveImg" />
+                <input
+                    type="file"
+                    name="image"
+                    @change="saveImg"
+                    v-bind="fields.image"
+                />
             </div>
 
             <button type="submit" class="btn btn-primary">Send</button>
@@ -74,13 +79,16 @@
 export default {
     computed: {
         post() {
-            this.fields = this.$store.getters.getOnePost;
+            this.fields = this.$store.getters.getOnePost.post;
             return this.$store.getters.getOnePost;
+        },
+        categoriesFromStore() {
+            return this.$store.getters.getCategories;
         }
     },
     mounted() {
         this.$store.dispatch("getOnePost", this.$route.params.postId);
-        this.setData();
+        this.$store.dispatch("getCategories");
     },
     data() {
         return {
@@ -98,7 +106,17 @@ export default {
     },
     methods: {
         submit() {
-            this.$store.dispatch("updatePost", this.fields);
+            const formData = new FormData();
+            formData.append("image", this.fields.image);
+            formData.append("title", this.fields.title);
+            formData.append("date", this.fields.date);
+            formData.append("author", this.fields.author);
+            formData.append("content", this.fields.content);
+            formData.append("categories", this.fields.categories);
+            this.$store.dispatch("updatePost", formData);
+        },
+        saveImg(event) {
+            this.fields.image = event.target.files[0];
         }
     }
 };

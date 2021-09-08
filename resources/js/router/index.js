@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import Home from "../pages/Home.vue";
 import Create from "../pages/posts/Create.vue";
 import Show from "../pages/posts/Show.vue";
+import Edit from "../pages/posts/Edit.vue";
 import Login from "../pages/Login.vue";
 import Subscription from "../pages/Subscription.vue";
 
@@ -24,6 +25,11 @@ export default new VueRouter({
             path: "/show/:postId",
             component: Show,
             name: "Show"
+        },
+        {
+            path: "/edit/:postId",
+            component: Edit,
+            name: "Edit"
         },
         {
             path: "/login",
