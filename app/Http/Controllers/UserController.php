@@ -74,10 +74,7 @@ class UserController extends Controller
         //
         $user = Auth::user();
         $validated = $request->validated();
-        dd($validated['subscription'] = $request->has('subscription'));
         $validated['id'] = Auth::user()->id;
-        //dd($validated);
-        //dd($user);
         $user->update($validated);
     }
 

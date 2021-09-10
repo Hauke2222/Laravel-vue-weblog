@@ -75,9 +75,18 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorePost $request, Post $post)
     {
         //
+        $validated = $request->validated();
+        $validated['user_id'] = Auth::user()->id;
+        if ($validated['image'] = $request->has('image')){
+            $validated['image'] = $request->file('image')->store('public/images/');
+            $validated['image'] = '../storage/images/' . substr($validated['image'], 15);
+        }
+        $post->update($validated);
+        $post->categories()->sync($request->categories);
+        return $post;
     }
 
     /**

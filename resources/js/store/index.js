@@ -32,6 +32,9 @@ export default new Vuex.Store({
         },
         SET_USER(state, payload) {
             state.users = payload;
+        },
+        SET_UPDATE_USER(state, payload) {
+            state.users = payload;
         }
     },
     actions: {
@@ -60,6 +63,12 @@ export default new Vuex.Store({
         updateUser({ commit }, payload) {
             axios.put("api/users/12", payload).then(response => {
                 commit("SET_USER", response.data.users);
+                router.push({ name: "Home" });
+            });
+        },
+        updatePost({ commit }, payload) {
+            axios.put("api/posts/1", payload).then(response => {
+                commit("SET_UPDATE_POST", response.data.posts);
                 router.push({ name: "Home" });
             });
         },

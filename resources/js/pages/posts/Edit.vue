@@ -44,8 +44,8 @@
                         v-for="(c, index) in categoriesFromStore"
                         :key="index"
                         v-bind:value="c.id"
-                        >{{ c.name }}</option
-                    >
+                        >{{ c.name }}
+                    </option>
                 </select>
             </div>
 
@@ -79,7 +79,12 @@
 export default {
     computed: {
         post() {
-            this.fields = this.$store.getters.getOnePost.post;
+            this.fields = JSON.parse(
+                JSON.stringify(this.$store.getters.getOnePost.post)
+            );
+            this.fields.categories = this.fields.categories.map(
+                item => item.id
+            );
             return this.$store.getters.getOnePost;
         },
         categoriesFromStore() {
