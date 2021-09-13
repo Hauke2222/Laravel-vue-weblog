@@ -67,10 +67,15 @@ export default new Vuex.Store({
             });
         },
         updatePost({ commit }, payload) {
-            axios.put("api/posts/1", payload).then(response => {
+
+            axios.put(`api/posts/${payload.getAll('id')[0]}`, payload).then(response => {
                 commit("SET_UPDATE_POST", response.data.posts);
+
                 router.push({ name: "Home" });
-            });
+            }).catch(error => {
+                console.log("ERRRR:: ",error.response.data);
+
+                });
         },
         getCategories({ commit }) {
             axios.get("api/categories").then(response => {

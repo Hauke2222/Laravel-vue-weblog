@@ -1,5 +1,5 @@
 <template>
-    <div class="card-body">
+    <div class="card-body" v-if="post">
         <form v-on:submit.prevent="submit">
             <div class="form-group">
                 <label for="title">Titel</label>
@@ -36,14 +36,13 @@
             <div class="form-group">
                 <select
                     v-model="fields.categories"
-                    name="categories[]"
                     id="categories"
                     multiple
                 >
                     <option
                         v-for="(c, index) in categoriesFromStore"
                         :key="index"
-                        v-bind:value="c.id"
+                        :value="c.id"
                         >{{ c.name }}
                     </option>
                 </select>
@@ -79,13 +78,8 @@
 export default {
     computed: {
         post() {
-            this.fields = JSON.parse(
-                JSON.stringify(this.$store.getters.getOnePost.post)
-            );
-            this.fields.categories = this.fields.categories.map(
-                item => item.id
-            );
-            return this.$store.getters.getOnePost;
+            this.fields = this.$store.getters.getOnePost.post
+            return this.$store.getters.getOnePost.post;
         },
         categoriesFromStore() {
             return this.$store.getters.getCategories;
@@ -98,13 +92,7 @@ export default {
     data() {
         return {
             fields: {
-                post_id: this.$route.params.postId,
-                title: "",
-                date: "",
-                author: "",
-                content: "",
-                image: "",
-                categories: []
+
             },
             errors: {}
         };
@@ -113,11 +101,13 @@ export default {
         submit() {
             const formData = new FormData();
             formData.append("image", this.fields.image);
+            formData.append("id", this.fields.id);
             formData.append("title", this.fields.title);
             formData.append("date", this.fields.date);
             formData.append("author", this.fields.author);
             formData.append("content", this.fields.content);
             formData.append("categories", this.fields.categories);
+
             this.$store.dispatch("updatePost", formData);
         },
         saveImg(event) {

@@ -36,7 +36,6 @@
             <div class="form-group">
                 <select
                     v-model="fields.categories"
-                    name="categories[]"
                     id="categories"
                     multiple
                 >
@@ -99,6 +98,7 @@ export default {
             formData.append("author", this.fields.author);
             formData.append("content", this.fields.content);
             formData.append("categories", this.fields.categories);
+            console.log(formData);
             this.$store.dispatch("createPost", formData);
         },
         saveImg(event) {

@@ -16,10 +16,10 @@ class StorePost extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation()
-    {
-        $this->merge(['categories' => explode(',', $this->categories)]);
-    }
+    // protected function prepareForValidation()
+    // {
+    //     $this->merge(['categories' => explode(',', $this->categories)]);
+    // }
 
     /**
      * Get the validation rules that apply to the request.
