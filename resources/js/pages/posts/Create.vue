@@ -34,11 +34,7 @@
                 />
             </div>
             <div class="form-group">
-                <select
-                    v-model="fields.categories"
-                    id="categories"
-                    multiple
-                >
+                <select v-model="fields.categories" id="categories" multiple>
                     <option
                         v-for="(c, index) in categoriesFromStore"
                         :key="index"
@@ -98,7 +94,6 @@ export default {
             formData.append("author", this.fields.author);
             formData.append("content", this.fields.content);
             formData.append("categories", this.fields.categories);
-            console.log(formData);
             this.$store.dispatch("createPost", formData);
         },
         saveImg(event) {

@@ -79,7 +79,6 @@ class PostController extends Controller
     public function update(StorePost $request, Post $post)
     {
         $validated = $request->validated();
-        dd($validated);
         $validated['user_id'] = Auth::user()->id;
         if ($validated['image'] = $request->has('image')){
             $validated['image'] = $request->file('image')->store('public/images/');

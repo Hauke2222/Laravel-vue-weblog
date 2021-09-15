@@ -40,12 +40,13 @@
 export default {
     computed: {
         posts() {
-            return this.$store.getters.getPosts;
+            return this.$store.getters.getAuthorsPosts;
         }
     },
     mounted() {
-        this.$store.dispatch("getAllPosts");
+        this.$store.dispatch("getAuthorsPosts");
     }
 };
 </script>
+
 <style></style>

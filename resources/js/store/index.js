@@ -8,6 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         posts: [],
+        authorsPosts: [],
         detailPost: [],
         detailPostComments: [],
         comments: [],
@@ -16,6 +17,12 @@ export default new Vuex.Store({
     },
     mutations: {
         SET_POSTS(state, payload) {
+            state.posts = payload;
+        },
+        SET_AUTHORS_POSTS(state, payload) {
+            state.authorsPosts = payload;
+        },
+        SET_UPDATE_POST(state, payload) {
             state.posts = payload;
         },
         SET_DETAIL_POST(state, payload) {
@@ -43,6 +50,11 @@ export default new Vuex.Store({
                 commit("SET_POSTS", response.data.posts);
             });
         },
+        getAuthorsPosts({ commit }, postIds) {
+            axios.get("api/posts/" + postIds).then(response => {
+                commit("SET_AUTHORS_POSTS", response.data);
+            });
+        },
         getOnePost({ commit }, postId) {
             axios.get("api/posts/" + postId).then(response => {
                 commit("SET_DETAIL_POST", response.data);
@@ -67,14 +79,11 @@ export default new Vuex.Store({
             });
         },
         updatePost({ commit }, payload) {
-
-            axios.put(`api/posts/${payload.getAll('id')[0]}`, payload).then(response => {
-                commit("SET_UPDATE_POST", response.data.posts);
-
-                router.push({ name: "Home" });
-            }).catch(error => {
-                console.log("ERRRR:: ",error.response.data);
-
+            axios
+                .post(`api/posts/${payload.getAll("id")[0]}`, payload)
+                .then(response => {
+                    commit("SET_UPDATE_POST", response.data.posts);
+                    router.push({ name: "Home" });
                 });
         },
         getCategories({ commit }) {
@@ -86,6 +95,9 @@ export default new Vuex.Store({
     getters: {
         getPosts(state) {
             return state.posts;
+        },
+        getAuthorsPosts(state) {
+            return state.authorsPosts;
         },
         getOnePost(state) {
             return state.detailPost;

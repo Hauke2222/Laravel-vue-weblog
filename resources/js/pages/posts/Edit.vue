@@ -34,11 +34,7 @@
                 />
             </div>
             <div class="form-group">
-                <select
-                    v-model="fields.categories"
-                    id="categories"
-                    multiple
-                >
+                <select v-model="fields.categories_id" id="categories" multiple>
                     <option
                         v-for="(c, index) in categoriesFromStore"
                         :key="index"
@@ -78,7 +74,7 @@
 export default {
     computed: {
         post() {
-            this.fields = this.$store.getters.getOnePost.post
+            this.fields = this.$store.getters.getOnePost.post;
             return this.$store.getters.getOnePost.post;
         },
         categoriesFromStore() {
@@ -91,22 +87,21 @@ export default {
     },
     data() {
         return {
-            fields: {
-
-            },
+            fields: {},
             errors: {}
         };
     },
     methods: {
         submit() {
             const formData = new FormData();
+            formData.append("_method", "PUT");
             formData.append("image", this.fields.image);
             formData.append("id", this.fields.id);
             formData.append("title", this.fields.title);
             formData.append("date", this.fields.date);
             formData.append("author", this.fields.author);
             formData.append("content", this.fields.content);
-            formData.append("categories", this.fields.categories);
+            formData.append("categories", this.fields.categories_id);
 
             this.$store.dispatch("updatePost", formData);
         },

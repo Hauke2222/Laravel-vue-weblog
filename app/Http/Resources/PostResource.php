@@ -24,11 +24,11 @@ class PostResource extends JsonResource
             'author' => $this->author,
             'content' => $this->content,
             'premium' => $this->premium,
-            // 'image' => $this->image,
+            'image' => $this->image,
             'user_id' => $this->user_id,
             'comments' => CommentResource::collection($this->comments),
-            // 'categories' => CategoryResource::collection($this->categories),
-            'categories' => $this->categories->pluck('id'),
+            'categories' => CategoryResource::collection($this->categories),
+            'categories_id' => $this->categories->pluck('id'),
         ];
     }
 }
