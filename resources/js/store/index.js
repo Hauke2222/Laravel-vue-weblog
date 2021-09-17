@@ -50,8 +50,8 @@ export default new Vuex.Store({
                 commit("SET_POSTS", response.data.posts);
             });
         },
-        getAuthorsPosts({ commit }, postIds) {
-            axios.get("api/posts/" + postIds).then(response => {
+        getAuthorsPosts({ commit }) {
+            axios.get("api/authorposts").then(response => {
                 commit("SET_AUTHORS_POSTS", response.data);
             });
         },
@@ -86,6 +86,13 @@ export default new Vuex.Store({
                     router.push({ name: "Home" });
                 });
         },
+        deletePost({ commit }, payload) {
+            axios.delete(`api/posts/1`, payload).then(response => {
+                commit("SET_UPDATE_POST", response.data.posts);
+                router.push({ name: "Home" });
+            });
+        },
+
         getCategories({ commit }) {
             axios.get("api/categories").then(response => {
                 commit("SET_CATEGORIES", response.data.categories);

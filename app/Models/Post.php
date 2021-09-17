@@ -19,6 +19,11 @@ class Post extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
     protected $table = 'posts';
     protected $fillable = [
         'title',

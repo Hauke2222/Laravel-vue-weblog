@@ -28,6 +28,26 @@
                                 {{ p.author + p.date }}
                             </div>
                         </router-link>
+                        <router-link
+                            :to="{
+                                name: 'Edit',
+                                params: { postId: p.id }
+                            }"
+                        >
+                            <button>
+                                <span style="font-size:25px;">&#9998;</span>
+                            </button>
+                        </router-link>
+                        <router-link
+                            :to="{
+                                name: '',
+                                params: { postId: p.id }
+                            }"
+                        >
+                            <button>
+                                <span style="font-size:28px;">&#10007;</span>
+                            </button>
+                        </router-link>
                     </li>
                 </div>
             </div>
@@ -40,7 +60,7 @@
 export default {
     computed: {
         posts() {
-            return this.$store.getters.getAuthorsPosts;
+            return this.$store.getters.getAuthorsPosts.posts;
         }
     },
     mounted() {

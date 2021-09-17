@@ -57,12 +57,7 @@
 
             <div class="form-group">
                 <label for="image"></label>
-                <input
-                    type="file"
-                    name="image"
-                    @change="saveImg"
-                    v-bind="fields.image"
-                />
+                <input type="file" name="image" @change="saveImg" />
             </div>
 
             <button type="submit" class="btn btn-primary">Send</button>
@@ -95,7 +90,8 @@ export default {
         submit() {
             const formData = new FormData();
             formData.append("_method", "PUT");
-            formData.append("image", this.fields.image);
+            if (typeof this.fields.image === "object")
+                formData.append("image", this.fields.image);
             formData.append("id", this.fields.id);
             formData.append("title", this.fields.title);
             formData.append("date", this.fields.date);
