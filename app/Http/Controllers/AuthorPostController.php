@@ -16,8 +16,6 @@ class AuthorPostController extends Controller
      */
     public function index()
     {
-        //$userId = Auth::user()->id;
-        //dd(Auth::user()->posts);
         return response()->json([
             'posts' => PostResource::collection(Auth::user()->posts),
         ]);

@@ -38,16 +38,11 @@
                                 <span style="font-size:25px;">&#9998;</span>
                             </button>
                         </router-link>
-                        <router-link
-                            :to="{
-                                name: '',
-                                params: { postId: p.id }
-                            }"
-                        >
-                            <button>
+                        <a>
+                            <button @click="deletePost(p.id)">
                                 <span style="font-size:28px;">&#10007;</span>
                             </button>
-                        </router-link>
+                        </a>
                     </li>
                 </div>
             </div>
@@ -65,6 +60,11 @@ export default {
     },
     mounted() {
         this.$store.dispatch("getAuthorsPosts");
+    },
+    methods: {
+        deletePost(id) {
+            this.$store.dispatch("deletePost", id);
+        }
     }
 };
 </script>

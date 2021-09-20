@@ -86,9 +86,8 @@ export default new Vuex.Store({
                     router.push({ name: "Home" });
                 });
         },
-        deletePost({ commit }, payload) {
-            axios.delete(`api/posts/1`, payload).then(response => {
-                commit("SET_UPDATE_POST", response.data.posts);
+        deletePost(__, payload) {
+            axios.delete("api/posts/" + payload).then(response => {
                 router.push({ name: "Home" });
             });
         },
