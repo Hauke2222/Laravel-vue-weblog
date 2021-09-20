@@ -1,5 +1,18 @@
 <template>
     <div>
+        <form @submit.prevent="handleSubmit" enctype="multipart/form-data">
+            <div class="form-group">
+                <select v-model="categories" id="categories" multiple>
+                    <option
+                        v-for="(c, index) in categoriesFromStore"
+                        :key="index"
+                        v-bind:value="c.id"
+                        >{{ c.name }}</option
+                    >
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
         <ul id="cardList" v-for="(p, index) in posts" :key="index">
             <br />
             <div class="center">
@@ -41,10 +54,22 @@ export default {
     computed: {
         posts() {
             return this.$store.getters.getPosts;
+        },
+        categoriesFromStore() {
+            return this.$store.getters.getCategories;
         }
+    },
+    data() {
+        return {
+            categories: []
+        };
+    },
+    methods: {
+        submit() {}
     },
     mounted() {
         this.$store.dispatch("getAllPosts");
+        this.$store.dispatch("getCategories");
     }
 };
 </script>

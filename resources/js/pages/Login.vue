@@ -2,10 +2,6 @@
     <div>
         <h2>Login</h2>
 
-        <div>Login response: {{ loginResponse }}</div>
-
-        <div>GET api/user response: {{ userResponse }}</div>
-
         <form @submit.prevent="handleSubmit">
             <div class="form-group">
                 <label for="username">Email address</label>
