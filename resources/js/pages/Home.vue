@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit.prevent="handleSubmit" enctype="multipart/form-data">
+        <form @submit.prevent="submit" enctype="multipart/form-data">
             <div class="form-group">
                 <select v-model="categories" id="categories" multiple>
                     <option
@@ -11,7 +11,6 @@
                     >
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Send</button>
         </form>
         <ul id="cardList" v-for="(p, index) in posts" :key="index">
             <br />
@@ -53,6 +52,20 @@
 export default {
     computed: {
         posts() {
+            if (this.categories.length > 0) {
+                // selecteer alle posts waarvan in deze post ten minste 1 categorie voorkomt in de door de
+                // bezoeker geselecteerde categorieen
+                var intersections = this.$store.getters.getPosts.filter(
+                    post => this.categories.indexOf(post) !== -1
+                );
+                console.log(intersections);
+                return null;
+
+                // return this.$store.getters.getPosts.filter(post =>
+                //     this.categories.includes(post.categories[0].id)
+
+                // );
+            }
             return this.$store.getters.getPosts;
         },
         categoriesFromStore() {
@@ -65,7 +78,11 @@ export default {
         };
     },
     methods: {
-        submit() {}
+        // submit() {
+        //     this.posts = this.posts.filter(
+        //         post => post.categories == this.categories
+        //     );
+        // }
     },
     mounted() {
         this.$store.dispatch("getAllPosts");
