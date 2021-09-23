@@ -18,7 +18,6 @@
             </ul>
         </nav>
         <div>
-            <h1 class="center">{{ message }}</h1>
             <router-view />
         </div>
     </div>
@@ -28,11 +27,6 @@
 import axios from "axios";
 
 export default {
-    data() {
-        return {
-            message: "Laravel vue weblog"
-        };
-    },
     methods: {
         logout() {
             axios.post("logout").then(response => {

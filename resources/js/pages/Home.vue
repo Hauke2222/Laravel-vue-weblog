@@ -2,7 +2,7 @@
     <div>
         <form @submit.prevent="submit" enctype="multipart/form-data">
             <div class="form-group">
-                <select v-model="categories" id="categories" multiple>
+                <select class="select" v-model="categories" id="categories" multiple>
                     <option
                         v-for="(c, index) in categoriesFromStore"
                         :key="index"
@@ -73,11 +73,6 @@ export default {
         };
     },
     methods: {
-        // submit() {
-        //     this.posts = this.posts.filter(
-        //         post => post.categories == this.categories
-        //     );
-        // }
     },
     mounted() {
         this.$store.dispatch("getAllPosts");
@@ -85,4 +80,19 @@ export default {
     }
 };
 </script>
-<style></style>
+<style>
+
+select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+}
+
+</style>
