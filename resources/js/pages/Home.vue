@@ -58,7 +58,9 @@ export default {
                 var intersections = this.$store.getters.getPosts.filter(
                     post => this.categories.indexOf(post) !== -1
                 );
-                console.log(intersections);
+                console.log('posts: ' +  this.$store.getters.getPosts);
+                console.log('categories: ' + this.categories);
+                console.log('intersections: ' + intersections);
                 return null;
 
                 // return this.$store.getters.getPosts.filter(post =>
