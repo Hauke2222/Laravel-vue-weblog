@@ -55,18 +55,11 @@ export default {
             if (this.categories.length > 0) {
                 // selecteer alle posts waarvan in deze post ten minste 1 categorie voorkomt in de door de
                 // bezoeker geselecteerde categorieen
-                var intersections = this.$store.getters.getPosts.filter(
-                    post => this.categories.indexOf(post) !== -1
+                let intersections = this.$store.getters.getPosts.filter(post =>
+                    post.categories.map(category => category.id).filter(postCategoryId => this.categories.includes(postCategoryId)).length > 0
                 );
-                console.log('posts: ' +  this.$store.getters.getPosts);
-                console.log('categories: ' + this.categories);
-                console.log('intersections: ' + intersections);
-                return null;
 
-                // return this.$store.getters.getPosts.filter(post =>
-                //     this.categories.includes(post.categories[0].id)
-
-                // );
+                return intersections;
             }
             return this.$store.getters.getPosts;
         },
