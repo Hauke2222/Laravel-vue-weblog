@@ -18,7 +18,10 @@ class StorePost extends FormRequest
 
     protected function prepareForValidation()
     {
-        $this->merge(['categories' => explode(',', $this->categories)]);
+        $this->merge([
+            'categories' => explode(',', $this->categories),
+            'premium' => ($this->premium === 'true') ? true : false
+        ]);
     }
 
     /**
@@ -33,7 +36,7 @@ class StorePost extends FormRequest
             'date' => 'required',
             'author' => 'required',
             'content' => 'required',
-            'premium' => 'nullable',
+            'premium' => 'required|boolean',
             'image' => 'mimes:jpeg,bmp,png|max:2000',
             'categories' => 'array'
         ];

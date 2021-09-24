@@ -34,4 +34,7 @@ class Post extends Model
         'image',
         'user_id',
     ];
+    protected $casts = [
+        'premium' => 'boolean',
+    ];
 }

@@ -56,6 +56,15 @@
             </div>
 
             <div class="form-group">
+                <label for="premium">Premium</label>
+                <input
+                    type="checkbox"
+                    name="premium"
+                    v-model="fields.premium"
+                />
+            </div>
+
+            <div class="form-group">
                 <label for="image"></label>
                 <input type="file" name="image" @change="saveImg" />
             </div>
@@ -82,7 +91,9 @@ export default {
     },
     data() {
         return {
-            fields: {},
+            fields: {
+                premium: 0
+            },
             errors: {}
         };
     },
@@ -98,6 +109,7 @@ export default {
             formData.append("author", this.fields.author);
             formData.append("content", this.fields.content);
             formData.append("categories", this.fields.categories_id);
+            formData.append("premium", this.fields.premium);
 
             this.$store.dispatch("updatePost", formData);
         },

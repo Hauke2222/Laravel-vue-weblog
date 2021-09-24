@@ -19,9 +19,15 @@ class PostController extends Controller
      */
     public function index()
     {
+        if(Auth::user() && Auth::user()->subscription == 1) {
+            return response()->json([
+                'posts' => PostResource::collection(Post::all()),
+            ]);
+        }
         return response()->json([
-            'posts' => PostResource::collection(Post::all()),
+            'posts' => PostResource::collection(Post::where('premium', '0')->get()),
         ]);
+
     }
     /**
      * Store a newly created resource in storage.
@@ -32,7 +38,6 @@ class PostController extends Controller
     public function store(StorePost $request)
     {
         $validated = $request->validated();
-
         $validated['user_id'] = Auth::user()->id;
         if ($validated['image'] = $request->has('image')) {
             $validated['image'] = $request->file('image')->store('public/images/');
