@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         //run php artisan schedule:work to start the scheduler
-        $schedule->command('mail:sendWeeklyDigest')->everyMinute();
+        $schedule->command('mail:sendWeeklyDigest')->weekly();
     }
 
     /**

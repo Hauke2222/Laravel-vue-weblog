@@ -20,7 +20,7 @@ class SendWeeklyDigest extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Sends the weekly digest';
 
     /**
      * Create a new command instance.

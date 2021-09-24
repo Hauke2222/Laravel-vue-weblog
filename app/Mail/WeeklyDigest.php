@@ -28,6 +28,6 @@ class WeeklyDigest extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.digest');
+        return $this->markdown('emails.digest');
     }
 }
