@@ -20,7 +20,8 @@ export default new VueRouter({
         },
         {
             path: "/create",
-            component: Create
+            component: Create,
+            name: "Create"
         },
         {
             path: "/show/:postId",
@@ -39,7 +40,8 @@ export default new VueRouter({
         },
         {
             path: "/subscribe",
-            component: Subscription
+            component: Subscription,
+            name: "Subscription"
         },
         {
             path: "/author",

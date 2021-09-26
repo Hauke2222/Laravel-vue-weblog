@@ -2,9 +2,11 @@
     <div>
         <nav>
             <ul>
-                <li><a href="/">Posts</a></li>
                 <li>
-                    <a href="#/create">Create</a>
+                    <router-link :to="{ name: 'Home' }">Posts</router-link>
+                </li>
+                <li>
+                   <router-link :to="{ name: 'Create' }">Create</router-link>
                 </li>
                 <li>
                     <router-link :to="{ name: 'Login' }">Login</router-link>
@@ -13,7 +15,10 @@
                     <a href="#" @click.prevent="logout">Logout</a>
                 </li>
                 <li>
-                    <router-link to="/subscribe">Subscribe</router-link>
+                    <router-link :to="{ name: 'Subscription'}">Subscribe</router-link>
+                </li>
+                <li>
+
                 </li>
             </ul>
         </nav>
@@ -25,15 +30,20 @@
 
 <script>
 import axios from "axios";
+import router from "./router";
 
 export default {
     methods: {
         logout() {
             axios.post("logout").then(response => {
-                console.log(response);
-                //router.push({ name: "Home" });
+                router.push({ name: "Home" });
             });
         }
+    }, 
+    mounted() {
+        axios.get('api/user').then(response => {
+        console.log(response.body);
+        })
     }
 };
 </script>
