@@ -20,7 +20,6 @@ use App\Http\Controllers\AuthorPostController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    dd("Authenticated!");
     return $request->user();
 });
 

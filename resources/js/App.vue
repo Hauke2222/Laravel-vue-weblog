@@ -6,7 +6,7 @@
                     <router-link :to="{ name: 'Home' }">Posts</router-link>
                 </li>
                 <li>
-                   <router-link :to="{ name: 'Create' }">Create</router-link>
+                    <router-link :to="{ name: 'Create' }">Create</router-link>
                 </li>
                 <li>
                     <router-link :to="{ name: 'Login' }">Login</router-link>
@@ -15,11 +15,11 @@
                     <a href="#" @click.prevent="logout">Logout</a>
                 </li>
                 <li>
-                    <router-link :to="{ name: 'Subscription'}">Subscribe</router-link>
+                    <router-link :to="{ name: 'Subscription' }"
+                        >Subscribe</router-link
+                    >
                 </li>
-                <li>
-
-                </li>
+                <li class="float-right">{{ user.name }}</li>
             </ul>
         </nav>
         <div>
@@ -33,17 +33,25 @@ import axios from "axios";
 import router from "./router";
 
 export default {
+    data() {
+        return {
+            user: ""
+        };
+    },
     methods: {
         logout() {
             axios.post("logout").then(response => {
                 router.push({ name: "Home" });
             });
+        },
+        getUser() {
+            axios.get("api/user").then(response => {
+                this.user = response.data;
+            });
         }
-    }, 
+    },
     mounted() {
-        axios.get('api/user').then(response => {
-        console.log(response.body);
-        })
+        this.getUser();
     }
 };
 </script>
@@ -76,7 +84,7 @@ li a {
 
 li a:hover {
     background-color: white;
-    color: #666;
+    color: black;
 }
 
 .float-right {
