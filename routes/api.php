@@ -27,8 +27,12 @@ Route::resource('users', UserController::class);
 
 Route::resource('posts', PostController::class);
 
-Route::resource('comments', CommentController::class);
+Route::resource('comments', CommentController::class)->middleware('auth:sanctum');
 
 Route::resource('categories', CategoryController::class);
 
-Route::resource('authorposts', AuthorPostController::class);
+Route::resource('authorposts', AuthorPostController::class)->middleware('auth:sanctum');
+
+Route::resource('posts', PostController::class)->only([
+    'create', 'store', 'update', 'destroy'
+])->middleware('auth:sanctum');

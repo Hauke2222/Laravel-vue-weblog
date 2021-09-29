@@ -11,7 +11,7 @@ import Subscription from "../pages/Subscription.vue";
 
 Vue.use(VueRouter);
 
-export default new VueRouter({
+const router = new VueRouter({
     routes: [
         {
             path: "/",
@@ -21,7 +21,10 @@ export default new VueRouter({
         {
             path: "/create",
             component: Create,
-            name: "Create"
+            name: "Create",
+            meta: {
+                shouldBeLoggedIn: true
+            }
         },
         {
             path: "/show/:postId",
@@ -31,22 +34,42 @@ export default new VueRouter({
         {
             path: "/edit/:postId",
             component: Edit,
-            name: "Edit"
+            name: "Edit",
+            meta: {
+                shouldBeLoggedIn: true
+            }
         },
         {
             path: "/login",
             component: Login,
-            name: "Login"
+            name: "Login",
+            meta: {
+                shouldBeLoggedOut: true
+            }
         },
         {
             path: "/subscribe",
             component: Subscription,
-            name: "Subscription"
+            name: "Subscription",
+            meta: {
+                shouldBeLoggedIn: true
+            }
         },
         {
             path: "/author",
             component: Author,
-            name: "Author"
+            name: "Author",
+            meta: {
+                shouldBeLoggedIn: true
+            }
         }
     ]
 });
+
+router.beforeEach(({ meta }, from, next) => {
+    //const isLoggedIn = store.getters["auth/getIsLoggedIn"];
+    if (meta.shouldBeLoggedIn && !isLoggedIn) next({ name: "Login" });
+    next();
+});
+
+export default router;
