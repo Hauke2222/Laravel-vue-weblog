@@ -13,7 +13,7 @@ export default new Vuex.Store({
         detailPostComments: [],
         comments: [],
         categories: [],
-        users: []
+        user: []
     },
     mutations: {
         SET_POSTS(state, payload) {
@@ -38,10 +38,10 @@ export default new Vuex.Store({
             state.categories = payload;
         },
         SET_USER(state, payload) {
-            state.users = payload;
+            state.user = payload;
         },
         SET_UPDATE_USER(state, payload) {
-            state.users = payload;
+            state.user = payload;
         }
     },
     actions: {
@@ -96,6 +96,16 @@ export default new Vuex.Store({
             axios.get("api/categories").then(response => {
                 commit("SET_CATEGORIES", response.data.categories);
             });
+        },
+        login({ commit }, { email, password }) {
+            axios.post("login", { email, password }).then(response => {
+                router.push({ name: "Home" });
+            });
+        },
+        logout() {
+            axios.post("logout").then(response => {
+                //router.push({ name: "Home" });
+            });
         }
     },
     getters: {
@@ -110,6 +120,9 @@ export default new Vuex.Store({
         },
         getCategories(state) {
             return state.categories;
+        },
+        getLoggedInUser(state) {
+            return state.user;
         }
     }
 });

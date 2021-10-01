@@ -40,18 +40,8 @@ export default {
     },
     methods: {
         logout() {
-            axios.post("logout").then(response => {
-                router.push({ name: "Home" });
-            });
-        },
-        getUser() {
-            axios.get("api/user").then(response => {
-                this.user = response.data;
-            });
+            this.$store.dispatch("logout");
         }
-    },
-    mounted() {
-        this.getUser();
     }
 };
 </script>

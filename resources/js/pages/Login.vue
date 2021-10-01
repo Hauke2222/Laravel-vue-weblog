@@ -7,7 +7,7 @@
                 <label for="username">Email address</label>
                 <input
                     type="text"
-                    v-model="email"
+                    v-model="loginDetails.email"
                     required
                     name="email"
                     class="form-control"
@@ -18,7 +18,7 @@
                 <label htmlFor="password">Password</label>
                 <input
                     type="password"
-                    v-model="password"
+                    v-model="loginDetails.password"
                     required
                     name="password"
                     class="form-control"
@@ -33,40 +33,19 @@
 </template>
 
 <script>
-import axios from "axios";
-import router from "../router";
-
 export default {
     data() {
         return {
-            email: "",
-            password: "",
-            submitted: false,
-            loginResponse: "",
-            userResponse: ""
+            loginDetails: {
+                email: "",
+                password: ""
+            }
         };
     },
-    created() {
-        this.getUser();
-    },
     methods: {
-        getUser() {
-            axios.get("api/user").then(response => {
-                this.userResponse = response;
-            });
-        },
         handleSubmit() {
-            this.submitted = true;
-            const { email, password } = this;
-
-            axios
-                .post("login", { email, password })
-                .then(response => {
-                    router.push({ name: "Home" });
-                })
-                .catch(error => {
-                    this.loginResponse = error;
-                });
+            console.log(this.loginDetails);
+            this.$store.dispatch("login", this.loginDetails);
         }
     }
 };
