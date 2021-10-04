@@ -13,7 +13,8 @@ export default new Vuex.Store({
         detailPostComments: [],
         comments: [],
         categories: [],
-        user: []
+        user: [],
+        loggedin: []
     },
     mutations: {
         SET_POSTS(state, payload) {
@@ -39,6 +40,9 @@ export default new Vuex.Store({
         },
         SET_USER(state, payload) {
             state.user = payload;
+        },
+        SET_LOGGEDIN(state, payload) {
+            state.loggedin = payload;
         },
         SET_UPDATE_USER(state, payload) {
             state.user = payload;
@@ -72,6 +76,12 @@ export default new Vuex.Store({
                 router.push({ name: "Home" });
             });
         },
+        createUser({ commit }, payload) {
+            axios.post("api/users", payload).then(response => {
+                commit("SET_USER", response.data.users);
+                router.push({ name: "Home" });
+            });
+        },
         updateUser({ commit }, payload) {
             axios.put("api/users/12", payload).then(response => {
                 commit("SET_USER", response.data.users);
@@ -100,6 +110,9 @@ export default new Vuex.Store({
         login({ commit }, { email, password }) {
             axios.post("login", { email, password }).then(response => {
                 router.push({ name: "Home" });
+            });
+            axios.get("/loggedin").then(response => {
+                commit("SET_LOGGEDIN", response.data);
             });
         },
         logout() {

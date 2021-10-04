@@ -12,6 +12,11 @@
                     <router-link :to="{ name: 'Login' }">Login</router-link>
                 </li>
                 <li>
+                    <router-link :to="{ name: 'Register' }"
+                        >Register</router-link
+                    >
+                </li>
+                <li>
                     <a href="#" @click.prevent="logout">Logout</a>
                 </li>
                 <li>
@@ -46,6 +51,9 @@ export default {
 };
 </script>
 <style>
+.padding {
+    padding: 8px;
+}
 .center {
     display: flex;
     justify-content: center;
@@ -93,14 +101,6 @@ li a:hover {
 
 .button:hover {
     background-color: #e7e7e7;
-}
-
-input {
-    padding: 6px;
-    border: solid lightgray;
-    margin-top: 8px;
-    margin-right: 16px;
-    font-size: 21px;
 }
 
 label {

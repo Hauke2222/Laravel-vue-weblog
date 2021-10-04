@@ -26,8 +26,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return Auth::user();
 });
 
-Route::get('/me', function () {
-    dd(Auth::check());
+Route::get('/loggedin', function () {
+    return Auth::user();
 });
 
 require __DIR__.'/auth.php';

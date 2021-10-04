@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUser;
+use App\Http\Requests\StoreCreateUser;
 use Auth;
 
 class UserController extends Controller
@@ -17,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        return dd(Auth::user());
+        dd(Auth::check());
     }
 
     /**
@@ -36,9 +37,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCreateUser $request)
     {
         //
+        $validated = $request->validated();
+        return User::create($validated);
     }
 
     /**

@@ -6,6 +6,7 @@ import Create from "../pages/posts/Create.vue";
 import Show from "../pages/posts/Show.vue";
 import Edit from "../pages/posts/Edit.vue";
 import Login from "../pages/Login.vue";
+import Register from "../pages/Register.vue";
 import Author from "../pages/Author.vue";
 import Subscription from "../pages/Subscription.vue";
 
@@ -43,6 +44,14 @@ const router = new VueRouter({
             path: "/login",
             component: Login,
             name: "Login",
+            meta: {
+                shouldBeLoggedOut: true
+            }
+        },
+        {
+            path: "/register",
+            component: Register,
+            name: "Register",
             meta: {
                 shouldBeLoggedOut: true
             }

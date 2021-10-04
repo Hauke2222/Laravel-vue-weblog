@@ -1,8 +1,24 @@
 <template>
     <div class="padding">
-        <b>Login</b><br /><br />
+        <b>Register</b><br /><br />
         <form @submit.prevent="handleSubmit">
             <table border="0">
+                <tr>
+                    <td>name:</td>
+                    <td>
+                        <input
+                            required
+                            type="text"
+                            name="name"
+                            size="20"
+                            autocorrect="off"
+                            spellcheck="false"
+                            autocapitalize="off"
+                            autofocus="true"
+                            v-model="userDetails.name"
+                        />
+                    </td>
+                </tr>
                 <tr>
                     <td>e-mail:</td>
                     <td>
@@ -15,7 +31,7 @@
                             spellcheck="false"
                             autocapitalize="off"
                             autofocus="true"
-                            v-model="loginDetails.email"
+                            v-model="userDetails.email"
                         />
                     </td>
                 </tr>
@@ -27,7 +43,7 @@
                             type="password"
                             name="password"
                             size="20"
-                            v-model="loginDetails.password"
+                            v-model="userDetails.password"
                         />
                     </td>
                 </tr>
@@ -43,7 +59,8 @@
 export default {
     data() {
         return {
-            loginDetails: {
+            userDetails: {
+                name: "",
                 email: "",
                 password: ""
             }
@@ -51,7 +68,7 @@ export default {
     },
     methods: {
         handleSubmit() {
-            this.$store.dispatch("login", this.loginDetails);
+            this.$store.dispatch("createUser", this.userDetails);
         }
     }
 };
