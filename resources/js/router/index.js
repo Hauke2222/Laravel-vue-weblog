@@ -22,10 +22,10 @@ const router = new VueRouter({
         {
             path: "/create",
             component: Create,
-            name: "Create",
-            meta: {
-                shouldBeLoggedIn: true
-            }
+            name: "Create"
+            // meta: {
+            //     shouldBeLoggedIn: true
+            // }
         },
         {
             path: "/show/:postId",

@@ -21,11 +21,13 @@ class PostController extends Controller
     {
         if(Auth::user() && Auth::user()->subscription == 1) {
             return response()->json([
-                'posts' => PostResource::collection(Post::all()),
+                'posts' => PostResource::collection(Post::orderBy('date', 'desc')->get()),
             ]);
         }
         return response()->json([
-            'posts' => PostResource::collection(Post::where('premium', '0')->get()),
+            'posts' => PostResource::collection(Post::orderBy('date', 'desc')
+            ->where('premium', '0')
+            ->get()),
         ]);
 
     }
