@@ -1,39 +1,54 @@
 <template>
-    <div>
-        <form @submit.prevent="handleSubmit" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input
-                    type="text"
-                    v-model="name"
-                    required
-                    name="name"
-                    class="form-control"
-                />
-            </div>
+    <div class="padding">
+        <b>Subscribe</b><br /><br />
+        <form @submit.prevent="handleSubmit">
+            <table border="0">
+                <tr>
+                    <td>name:</td>
+                    <td>
+                        <input
+                            required
+                            type="text"
+                            name="name"
+                            size="20"
+                            autocorrect="off"
+                            spellcheck="false"
+                            autocapitalize="off"
+                            autofocus="true"
+                            v-model="name"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>e-mail:</td>
+                    <td>
+                        <input
+                            required
+                            type="text"
+                            name="email"
+                            size="20"
+                            autocorrect="off"
+                            spellcheck="false"
+                            autocapitalize="off"
+                            autofocus="true"
+                            v-model="email"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>premium €2,- (per maand):</td>
+                    <td>
+                        <input
+                            type="checkbox"
+                            name="subscription"
+                            v-model="subscription"
+                        />
+                    </td>
+                </tr>
+            </table>
 
-            <div class="form-group">
-                <label for="email">E-mail</label>
-                <input
-                    type="email"
-                    v-model="email"
-                    required
-                    name="email"
-                    class="form-control"
-                />
-            </div>
-            <div class="form-group">
-                <label for="subscription">Premium €2,- (per maand)</label>
-                <input
-                    type="checkbox"
-                    name="subscription"
-                    v-model="subscription"
-                />
-            </div>
-
-            <div class="form-group">
-                <button class="btn btn-primary">Submit</button>
-            </div>
+            <br />
+            <input type="submit" />
         </form>
     </div>
 </template>
@@ -47,7 +62,8 @@ export default {
         return {
             email: "",
             name: "",
-            subscription: false
+            subscription: false,
+            id: this.$store.getters.getLoggedInUser.id
         };
     },
     methods: {
@@ -55,7 +71,8 @@ export default {
             this.$store.dispatch("updateUser", {
                 email: this.email,
                 name: this.name,
-                subscription: this.subscription
+                subscription: this.subscription,
+                id: this.id
             });
         }
     },

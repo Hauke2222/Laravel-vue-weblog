@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        dd(Auth::check());
+        return Auth::user();
     }
 
     /**

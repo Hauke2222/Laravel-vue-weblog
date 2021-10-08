@@ -9,6 +9,7 @@ import Login from "../pages/Login.vue";
 import Register from "../pages/Register.vue";
 import Author from "../pages/Author.vue";
 import Subscription from "../pages/Subscription.vue";
+import store from "../store/index.js";
 
 Vue.use(VueRouter);
 
@@ -22,10 +23,10 @@ const router = new VueRouter({
         {
             path: "/create",
             component: Create,
-            name: "Create"
-            // meta: {
-            //     shouldBeLoggedIn: true
-            // }
+            name: "Create",
+            meta: {
+                shouldBeLoggedIn: true
+            }
         },
         {
             path: "/show/:postId",
@@ -76,7 +77,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach(({ meta }, from, next) => {
-    //const isLoggedIn = store.getters["auth/getIsLoggedIn"];
+    const isLoggedIn = store.getters.getLoggedIn;
     if (meta.shouldBeLoggedIn && !isLoggedIn) next({ name: "Login" });
     next();
 });

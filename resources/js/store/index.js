@@ -14,7 +14,8 @@ export default new Vuex.Store({
         comments: [],
         categories: [],
         user: [],
-        loggedin: []
+        loggedInUser: [],
+        loggedIn: false
     },
     mutations: {
         SET_POSTS(state, payload) {
@@ -41,8 +42,11 @@ export default new Vuex.Store({
         SET_USER(state, payload) {
             state.user = payload;
         },
+        SET_LOGGEDIN_USER(state, payload) {
+            state.loggedInUser = payload;
+        },
         SET_LOGGEDIN(state, payload) {
-            state.loggedin = payload;
+            state.loggedIn = payload;
         },
         SET_UPDATE_USER(state, payload) {
             state.user = payload;
@@ -107,17 +111,23 @@ export default new Vuex.Store({
                 commit("SET_CATEGORIES", response.data.categories);
             });
         },
-        login({ commit }, { email, password }) {
+        login({ commit, dispatch }, { email, password }) {
             axios.post("login", { email, password }).then(response => {
                 router.push({ name: "Home" });
-            });
-            axios.get("/loggedin").then(response => {
-                commit("SET_LOGGEDIN", response.data);
+                dispatch("loggedInUser");
             });
         },
-        logout() {
+        logout({ commit }) {
             axios.post("logout").then(response => {
                 //router.push({ name: "Home" });
+                commit("SET_LOGGEDIN", false);
+                commit("SET_LOGGEDIN_USER", "");
+            });
+        },
+        loggedInUser({ commit }) {
+            axios.get("/api/users").then(response => {
+                commit("SET_LOGGEDIN_USER", response.data);
+                commit("SET_LOGGEDIN", true);
             });
         }
     },
@@ -136,6 +146,9 @@ export default new Vuex.Store({
         },
         getLoggedInUser(state) {
             return state.user;
+        },
+        getLoggedIn(state) {
+            return state.loggedIn;
         }
     }
 });

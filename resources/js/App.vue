@@ -17,6 +17,9 @@
                     >
                 </li>
                 <li>
+                    <router-link :to="{ name: 'Author' }">Author</router-link>
+                </li>
+                <li>
                     <a href="#" @click.prevent="logout">Logout</a>
                 </li>
                 <li>
