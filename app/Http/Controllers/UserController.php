@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreUser;
+use App\Http\Requests\UpdateUser;
 use App\Http\Requests\StoreCreateUser;
 use Auth;
 
@@ -73,7 +73,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUser $request)
+    public function update(UpdateUser $request)
     {
         //
         $user = Auth::user();

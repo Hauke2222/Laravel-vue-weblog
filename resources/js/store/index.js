@@ -87,7 +87,7 @@ export default new Vuex.Store({
             });
         },
         updateUser({ commit }, payload) {
-            axios.put("api/users/12", payload).then(response => {
+            axios.put("api/users/" + payload.id, payload).then(response => {
                 commit("SET_USER", response.data.users);
                 router.push({ name: "Home" });
             });
@@ -119,9 +119,9 @@ export default new Vuex.Store({
         },
         logout({ commit }) {
             axios.post("logout").then(response => {
-                //router.push({ name: "Home" });
                 commit("SET_LOGGEDIN", false);
                 commit("SET_LOGGEDIN_USER", "");
+                // router.push({ name: "Home" });
             });
         },
         loggedInUser({ commit }) {
@@ -145,7 +145,7 @@ export default new Vuex.Store({
             return state.categories;
         },
         getLoggedInUser(state) {
-            return state.user;
+            return state.loggedInUser;
         },
         getLoggedIn(state) {
             return state.loggedIn;

@@ -6,33 +6,13 @@
                 <tr>
                     <td>name:</td>
                     <td>
-                        <input
-                            required
-                            type="text"
-                            name="name"
-                            size="20"
-                            autocorrect="off"
-                            spellcheck="false"
-                            autocapitalize="off"
-                            autofocus="true"
-                            v-model="name"
-                        />
+                        <p>{{ user.name }}</p>
                     </td>
                 </tr>
                 <tr>
                     <td>e-mail:</td>
                     <td>
-                        <input
-                            required
-                            type="text"
-                            name="email"
-                            size="20"
-                            autocorrect="off"
-                            spellcheck="false"
-                            autocapitalize="off"
-                            autofocus="true"
-                            v-model="email"
-                        />
+                        <p>{{ user.email }}</p>
                     </td>
                 </tr>
                 <tr>
@@ -54,23 +34,21 @@
 </template>
 
 <script>
-import axios from "axios";
-import router from "../router";
-
 export default {
+    computed: {
+        user() {
+            return this.$store.getters.getLoggedInUser;
+        }
+    },
     data() {
         return {
-            email: "",
-            name: "",
             subscription: false,
-            id: this.$store.getters.getLoggedInUser.id
+            id: user.id
         };
     },
     methods: {
         handleSubmit() {
             this.$store.dispatch("updateUser", {
-                email: this.email,
-                name: this.name,
                 subscription: this.subscription,
                 id: this.id
             });
