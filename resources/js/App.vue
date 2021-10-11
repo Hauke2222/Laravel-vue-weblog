@@ -1,35 +1,6 @@
 <template>
     <div>
-        <nav>
-            <ul>
-                <li>
-                    <router-link :to="{ name: 'Home' }">Posts</router-link>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Create' }">Create</router-link>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Login' }">Login</router-link>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Register' }"
-                        >Register</router-link
-                    >
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Author' }">Author</router-link>
-                </li>
-                <li>
-                    <a href="#" @click.prevent="logout">Logout</a>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Subscription' }"
-                        >Subscribe</router-link
-                    >
-                </li>
-                <li class="float-right">{{ user.name }}</li>
-            </ul>
-        </nav>
+        <nav-bar />
         <div>
             <router-view />
         </div>
@@ -39,18 +10,10 @@
 <script>
 import axios from "axios";
 import router from "./router";
+import NavBar from "./pages/NavBar.vue";
 
 export default {
-    data() {
-        return {
-            user: ""
-        };
-    },
-    methods: {
-        logout() {
-            this.$store.dispatch("logout");
-        }
-    }
+    components: { NavBar }
 };
 </script>
 <style>

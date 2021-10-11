@@ -46,7 +46,7 @@ const router = new VueRouter({
             component: Login,
             name: "Login",
             meta: {
-                shouldBeLoggedOut: true
+                shouldBeLoggedIn: false
             }
         },
         {
@@ -54,7 +54,7 @@ const router = new VueRouter({
             component: Register,
             name: "Register",
             meta: {
-                shouldBeLoggedOut: true
+                shouldBeLoggedIn: false
             }
         },
         {
