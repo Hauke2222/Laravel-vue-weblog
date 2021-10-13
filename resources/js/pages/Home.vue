@@ -1,8 +1,13 @@
 <template>
-    <div>
+    <div class="padding">
         <form @submit.prevent="submit" enctype="multipart/form-data">
             <div class="form-group">
-                <select class="select" v-model="categories" id="categories" multiple>
+                <select
+                    class="select"
+                    v-model="categories"
+                    id="categories"
+                    multiple
+                >
                     <option
                         v-for="(c, index) in categoriesFromStore"
                         :key="index"
@@ -37,7 +42,7 @@
                                 {{ p.categories[index].name }}
                             </div>
                             <div class="post-card-author-date">
-                                {{ p.author + p.date }}
+                                {{ p.author + " " + p.date }}
                             </div>
                         </router-link>
                     </li>
@@ -55,8 +60,13 @@ export default {
             if (this.categories.length > 0) {
                 // selecteer alle posts waarvan in deze post ten minste 1 categorie voorkomt in de door de
                 // bezoeker geselecteerde categorieen
-                let intersections = this.$store.getters.getPosts.filter(post =>
-                    post.categories.map(category => category.id).filter(postCategoryId => this.categories.includes(postCategoryId)).length > 0
+                let intersections = this.$store.getters.getPosts.filter(
+                    post =>
+                        post.categories
+                            .map(category => category.id)
+                            .filter(postCategoryId =>
+                                this.categories.includes(postCategoryId)
+                            ).length > 0
                 );
 
                 return intersections;
@@ -72,8 +82,7 @@ export default {
             categories: []
         };
     },
-    methods: {
-    },
+    methods: {},
     mounted() {
         this.$store.dispatch("getAllPosts");
         this.$store.dispatch("getCategories");
@@ -81,18 +90,16 @@ export default {
 };
 </script>
 <style>
-
 select {
-  appearance: none;
-  background-color: transparent;
-  border: none;
-  padding: 0 1em 0 0;
-  margin: 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: inherit;
-  line-height: inherit;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
 }
-
 </style>

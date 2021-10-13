@@ -1,16 +1,17 @@
 <template>
-    <div>
+    <div class="padding">
         <div v-for="(p, index) in post" :key="index">
             <h1>{{ p.title }}</h1>
             <h2>{{ p.date }}</h2>
             <h4>Author: {{ p.author }}</h4>
             <img v-bind:src="p.image" class="responsive-img" />
-            <p>{{ p.content }}</p>
-            <p>Comments:{{ p.comments }}</p>
+            <p>Text: {{ p.content }}</p>
+            <p>Comments:</p>
+            <div v-for="(c, index) in p.comments" :key="index">
+                {{ p.comments[index].id + ": " + p.comments[index].comment }}
+            </div>
         </div>
-        <!-- <div v-for="(c, index) in comments" :key="index">
-            comment: {{ c.comment }}
-        </div> -->
+        <br />
         <form v-on:submit.prevent="submit">
             <div class="form-group">
                 <label for="content">Comment:</label>
