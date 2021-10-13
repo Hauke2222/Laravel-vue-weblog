@@ -40,11 +40,7 @@ class CommentController extends Controller
     public function store(StoreComment $request)
     {
         $validated = $request->validated();
-        //dd($validated);
         return Comment::create($validated);
-        // return response()->json([
-        //     'posts' => Post::all(),
-        // ]);
     }
 
     /**

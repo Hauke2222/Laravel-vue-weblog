@@ -121,7 +121,6 @@ export default new Vuex.Store({
             axios.post("logout").then(response => {
                 commit("SET_LOGGEDIN", false);
                 commit("SET_LOGGEDIN_USER", "");
-                // router.push({ name: "Home" });
             });
         },
         loggedInUser({ commit }) {
