@@ -43,7 +43,7 @@ export default {
     data() {
         return {
             subscription: false,
-            id: user.id
+            id: this.$store.getters.getLoggedInUser.id
         };
     },
     methods: {
