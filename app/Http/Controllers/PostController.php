@@ -7,7 +7,7 @@ use Auth;
 use App\Models\Post;
 use App\Models\Category;
 use App\Http\Requests\StorePost;
-use App\Http\Resources\PostResource;
+use App\Http\Resources\PostOverviewResource;
 use App\Http\Resources\CategoryResource;
 
 class PostController extends Controller
@@ -21,11 +21,11 @@ class PostController extends Controller
     {
         if(Auth::user() && Auth::user()->subscription == 1) {
             return response()->json([
-                'posts' => PostResource::collection(Post::orderBy('date', 'desc')->get()),
+                'posts' => PostOverviewResource::collection(Post::orderBy('date', 'desc')->get()),
             ]);
         }
         return response()->json([
-            'posts' => PostResource::collection(Post::orderBy('date', 'desc')
+            'posts' => PostOverviewResource::collection(Post::orderBy('date', 'desc')
             ->where('premium', '0')
             ->get()),
         ]);
@@ -47,7 +47,9 @@ class PostController extends Controller
         }
         $post = Post::create($validated);
         $post->categories()->sync($request->categories);
-        return $post;
+        return response()->json([
+            'posts' => $post,
+        ]);
     }
 
     /**
@@ -59,7 +61,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return response()->json([
-            'post' => new PostResource($post),
+            'post' => new PostOverviewResource($post),
         ]);
     }
 
@@ -72,7 +74,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         return response()->json([
-            'post' => new PostResource($post),
+            'post' => new PostOverviewResource($post),
         ]);
     }
 
@@ -93,7 +95,9 @@ class PostController extends Controller
         }
         $post->update($validated);
         $post->categories()->sync($request->categories);
-        return $post;
+        return response()->json([
+            'posts' => $post,
+        ]);
     }
 
     /**

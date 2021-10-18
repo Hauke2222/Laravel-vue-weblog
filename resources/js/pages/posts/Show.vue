@@ -34,11 +34,13 @@
 export default {
     computed: {
         post() {
-            return this.$store.getters.getOnePost;
+            return this.$store.getters.getOnePost(
+                parseInt(this.$route.params.postId)
+            );
         }
     },
     mounted() {
-        this.$store.dispatch("getOnePost", this.$route.params.postId);
+        this.$store.dispatch("getAllPosts");
     },
     data() {
         return {

@@ -8,8 +8,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         posts: [],
-        authorsPosts: [],
-        detailPost: [],
         detailPostComments: [],
         comments: [],
         categories: [],
@@ -21,14 +19,8 @@ export default new Vuex.Store({
         SET_POSTS(state, payload) {
             state.posts = payload;
         },
-        SET_AUTHORS_POSTS(state, payload) {
-            state.authorsPosts = payload;
-        },
         SET_UPDATE_POST(state, payload) {
             state.posts = payload;
-        },
-        SET_DETAIL_POST(state, payload) {
-            state.detailPost = payload;
         },
         SET_COMMENT(state, payload) {
             state.comments = payload;
@@ -56,16 +48,6 @@ export default new Vuex.Store({
         getAllPosts({ commit }) {
             axios.get("api/posts").then(response => {
                 commit("SET_POSTS", response.data.posts);
-            });
-        },
-        getAuthorsPosts({ commit }) {
-            axios.get("api/authorposts").then(response => {
-                commit("SET_AUTHORS_POSTS", response.data);
-            });
-        },
-        getOnePost({ commit }, postId) {
-            axios.get("api/posts/" + postId).then(response => {
-                commit("SET_DETAIL_POST", response.data);
             });
         },
         createPost({ commit }, payload) {
@@ -105,7 +87,6 @@ export default new Vuex.Store({
                 router.push({ name: "Home" });
             });
         },
-
         getCategories({ commit }) {
             axios.get("api/categories").then(response => {
                 commit("SET_CATEGORIES", response.data.categories);
@@ -135,11 +116,21 @@ export default new Vuex.Store({
             return state.posts;
         },
         getAuthorsPosts(state) {
-            return state.authorsPosts;
+            return state.posts.filter(post => post.id == id);
         },
-        getOnePost(state) {
-            return state.detailPost;
+        // getOnePost(state, id) {
+        //     return state.posts.filter(post => post.id == id);
+        // },
+        getOnePost: state => id => {
+            return state.posts.find(post => post.id == id);
         },
+
+        // function(state, id) {
+        //     return function() {
+        //         return state.posts.filter(post => post.id == id);
+        //     };
+        // },
+
         getCategories(state) {
             return state.categories;
         },
