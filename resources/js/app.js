@@ -18,7 +18,7 @@ new Vue({
     store,
     router,
     created() {
-        axios.get("http://localhost:8000/sanctum/csrf-cookie");
+        axios.get("/sanctum/csrf-cookie");
         axios.get("/api/users").then(response => {
             const loggedIn = response.data;
             if (loggedIn) {
