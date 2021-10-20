@@ -50,6 +50,12 @@ export default new Vuex.Store({
                 commit("SET_POSTS", response.data.posts);
             });
         },
+        getOnePost({ commit }, postId) {
+            axios.get("api/posts/" + postId).then(response => {
+                console.log(response.data);
+                commit("SET_POSTS", response.data);
+            });
+        },
         createPost({ commit }, payload) {
             axios.post("api/posts", payload).then(response => {
                 commit("SET_POSTS", response.data.posts);
@@ -118,19 +124,9 @@ export default new Vuex.Store({
         getAuthorsPosts(state) {
             return state.posts.filter(post => post.id == id);
         },
-        // getOnePost(state, id) {
-        //     return state.posts.filter(post => post.id == id);
-        // },
         getOnePost: state => id => {
             return state.posts.find(post => post.id == id);
         },
-
-        // function(state, id) {
-        //     return function() {
-        //         return state.posts.filter(post => post.id == id);
-        //     };
-        // },
-
         getCategories(state) {
             return state.categories;
         },

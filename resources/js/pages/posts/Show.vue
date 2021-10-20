@@ -40,7 +40,7 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch("getAllPosts");
+        this.$store.dispatch("getOnePost", this.$route.params.postId);
     },
     data() {
         return {

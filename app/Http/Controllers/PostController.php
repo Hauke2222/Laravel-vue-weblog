@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Http\Requests\StorePost;
 use App\Http\Resources\PostOverviewResource;
+use App\Http\Resources\PostResource;
 use App\Http\Resources\CategoryResource;
 
 class PostController extends Controller
@@ -61,7 +62,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return response()->json([
-            'post' => new PostOverviewResource($post),
+            'post' => new PostResource($post),
         ]);
     }
 
