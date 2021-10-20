@@ -30,4 +30,6 @@ Route::get('/loggedin', function () {
     return dd(Auth::check());
 });
 
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
 require __DIR__.'/auth.php';

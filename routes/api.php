@@ -33,5 +33,3 @@ Route::resource('authorposts', AuthorPostController::class)->middleware('auth:sa
 Route::resource('posts', PostController::class)->only([
     'create', 'store', 'update', 'destroy'
 ])->middleware('auth:sanctum');
-
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
