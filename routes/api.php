@@ -7,6 +7,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthorPostController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,5 @@ Route::resource('authorposts', AuthorPostController::class)->middleware('auth:sa
 Route::resource('posts', PostController::class)->only([
     'create', 'store', 'update', 'destroy'
 ])->middleware('auth:sanctum');
+
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);

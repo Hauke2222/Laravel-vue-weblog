@@ -93,7 +93,7 @@ export default new Vuex.Store({
             });
         },
         login({ commit, dispatch }, { email, password }) {
-            axios.post("login", { email, password }).then(response => {
+            axios.post("api/login", { email, password }).then(response => {
                 router.push({ name: "Home" });
                 dispatch("loggedInUser");
             });
