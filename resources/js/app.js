@@ -22,7 +22,7 @@ new Vue({
         axios.get("/api/users").then(response => {
             const loggedIn = response.data;
             if (loggedIn) {
-                this.$store.dispatch("loggedInUser");
+                this.$store.dispatch("auth/loggedInUser");
             }
         });
     },

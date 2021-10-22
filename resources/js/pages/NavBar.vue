@@ -43,15 +43,15 @@
 export default {
     computed: {
         userName() {
-            return this.$store.getters.getLoggedInUser.name;
+            return this.$store.getters["auth/getLoggedInUser"].name;
         },
         loggedIn() {
-            return this.$store.getters.getLoggedIn;
+            return this.$store.getters["auth/getLoggedIn"];
         }
     },
     methods: {
         logout() {
-            this.$store.dispatch("logout");
+            this.$store.dispatch("auth/logout");
         }
     }
 };

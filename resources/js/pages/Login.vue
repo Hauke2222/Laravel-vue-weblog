@@ -51,7 +51,7 @@ export default {
     },
     methods: {
         handleSubmit() {
-            this.$store.dispatch("login", this.loginDetails);
+            this.$store.dispatch("auth/login", this.loginDetails);
         }
     }
 };

@@ -68,7 +68,7 @@ export default {
     },
     methods: {
         handleSubmit() {
-            this.$store.dispatch("createUser", this.userDetails);
+            this.$store.dispatch("users/createUser", this.userDetails);
         }
     }
 };

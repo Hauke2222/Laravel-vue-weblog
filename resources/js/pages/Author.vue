@@ -55,15 +55,18 @@
 export default {
     computed: {
         posts() {
-            return this.$store.getters.getAuthorsPosts.posts;
+            return this.$store.getters["posts/getAuthorsPosts"](this.userId);
+        },
+        userId() {
+            return this.$store.getters["auth/getLoggedInUser"].id;
         }
     },
     mounted() {
-        this.$store.dispatch("getAuthorsPosts");
+        this.$store.dispatch("posts/getAuthorsPosts");
     },
     methods: {
         deletePost(id) {
-            this.$store.dispatch("deletePost", id);
+            this.$store.dispatch("posts/deletePost", id);
         }
     }
 };

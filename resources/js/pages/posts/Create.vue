@@ -78,7 +78,7 @@
 export default {
     computed: {
         categoriesFromStore() {
-            return this.$store.getters.getCategories;
+            return this.$store.getters["posts/getCategories"];
         }
     },
     data() {
@@ -105,14 +105,14 @@ export default {
             formData.append("content", this.fields.content);
             formData.append("categories", this.fields.categories);
             formData.append("premium", this.fields.premium);
-            this.$store.dispatch("createPost", formData);
+            this.$store.dispatch("posts/createPost", formData);
         },
         saveImg(event) {
             this.fields.image = event.target.files[0];
         }
     },
     mounted() {
-        this.$store.dispatch("getCategories");
+        this.$store.dispatch("posts/getCategories");
     }
 };
 </script>

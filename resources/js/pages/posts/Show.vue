@@ -1,14 +1,18 @@
 <template>
     <div class="padding">
-        <div v-for="(p, index) in post" :key="index">
-            <h1>{{ p.title }}</h1>
-            <h2>{{ p.date }}</h2>
-            <h4>Author: {{ p.author }}</h4>
-            <img v-bind:src="p.image" class="responsive-img" />
-            <p>Text: {{ p.content }}</p>
+        <div>
+            <h1>{{ post.title }}</h1>
+            <h2>{{ post.date }}</h2>
+            <h4>Author: {{ post.author }}</h4>
+            <img v-bind:src="post.image" class="responsive-img" />
+            <p>Text: {{ post.content }}</p>
             <p>Comments:</p>
-            <div v-for="(c, index) in p.comments" :key="index">
-                {{ p.comments[index].id + ": " + p.comments[index].comment }}
+            <div v-for="(c, index) in post.comments" :key="index">
+                {{
+                    post.comments[index].id +
+                        ": " +
+                        post.comments[index].comment
+                }}
             </div>
         </div>
         <br />
@@ -34,13 +38,14 @@
 export default {
     computed: {
         post() {
-            return this.$store.getters.getOnePost(
+            return this.$store.getters["posts/getOnePost"](
                 parseInt(this.$route.params.postId)
             );
         }
     },
     mounted() {
-        this.$store.dispatch("getOnePost", this.$route.params.postId);
+        console.log(this.$store);
+        this.$store.dispatch("posts/getOnePost", this.$route.params.postId);
     },
     data() {
         return {

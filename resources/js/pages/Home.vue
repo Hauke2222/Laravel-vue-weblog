@@ -60,7 +60,9 @@ export default {
             if (this.categories.length > 0) {
                 // selecteer alle posts waarvan in deze post ten minste 1 categorie voorkomt in de door de
                 // bezoeker geselecteerde categorieen
-                let intersections = this.$store.getters.getPosts.filter(
+                let intersections = this.$store.getters[
+                    "posts/getPosts"
+                ].filter(
                     post =>
                         post.categories
                             .map(category => category.id)
@@ -71,10 +73,10 @@ export default {
 
                 return intersections;
             }
-            return this.$store.getters.getPosts;
+            return this.$store.getters["posts/getPosts"];
         },
         categoriesFromStore() {
-            return this.$store.getters.getCategories;
+            return this.$store.getters["posts/getCategories"];
         }
     },
     data() {
@@ -84,8 +86,8 @@ export default {
     },
     methods: {},
     mounted() {
-        this.$store.dispatch("getAllPosts");
-        this.$store.dispatch("getCategories");
+        this.$store.dispatch("posts/getAllPosts");
+        this.$store.dispatch("posts/getCategories");
     }
 };
 </script>

@@ -37,18 +37,18 @@
 export default {
     computed: {
         user() {
-            return this.$store.getters.getLoggedInUser;
+            return this.$store.getters["auth/getLoggedInUser"];
         }
     },
     data() {
         return {
             subscription: false,
-            id: this.$store.getters.getLoggedInUser.id
+            id: this.$store.getters["auth/getLoggedInUser"].id
         };
     },
     methods: {
         handleSubmit() {
-            this.$store.dispatch("updateUser", {
+            this.$store.dispatch("users/updateUser", {
                 subscription: this.subscription,
                 id: this.id
             });

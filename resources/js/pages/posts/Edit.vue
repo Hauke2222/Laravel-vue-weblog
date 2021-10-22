@@ -78,16 +78,16 @@
 export default {
     computed: {
         post() {
-            this.fields = this.$store.getters.getOnePost.post;
-            return this.$store.getters.getOnePost.post;
+            this.fields = this.$store.getters["posts/getOnePost"].post;
+            return this.$store.getters["posts/getOnePost"].post;
         },
         categoriesFromStore() {
-            return this.$store.getters.getCategories;
+            return this.$store.getters["posts/getCategories"];
         }
     },
     mounted() {
-        this.$store.dispatch("getOnePost", this.$route.params.postId);
-        this.$store.dispatch("getCategories");
+        this.$store.dispatch("posts/getOnePost", this.$route.params.postId);
+        this.$store.dispatch("posts/getCategories");
     },
     data() {
         return {
