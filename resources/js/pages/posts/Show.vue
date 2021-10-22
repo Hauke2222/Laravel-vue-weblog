@@ -58,7 +58,7 @@ export default {
     },
     methods: {
         submit() {
-            this.$store.dispatch("createComment", this.fields);
+            this.$store.dispatch("posts/createComment", this.fields);
         }
     }
 };

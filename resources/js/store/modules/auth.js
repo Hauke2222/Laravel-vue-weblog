@@ -4,7 +4,6 @@ import router from "../../router";
 export const auth = {
     namespaced: true,
     state: {
-        user: [],
         loggedInUser: [],
         loggedIn: false
     },

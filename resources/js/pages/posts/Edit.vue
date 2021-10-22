@@ -78,8 +78,16 @@
 export default {
     computed: {
         post() {
-            this.fields = this.$store.getters["posts/getOnePost"].post;
-            return this.$store.getters["posts/getOnePost"].post;
+            this.fields = JSON.parse(
+                JSON.stringify(
+                    this.$store.getters["posts/getOnePost"](
+                        parseInt(this.$route.params.postId)
+                    )
+                )
+            );
+            return this.$store.getters["posts/getOnePost"](
+                parseInt(this.$route.params.postId)
+            );
         },
         categoriesFromStore() {
             return this.$store.getters["posts/getCategories"];
@@ -111,7 +119,7 @@ export default {
             formData.append("categories", this.fields.categories_id);
             formData.append("premium", this.fields.premium);
 
-            this.$store.dispatch("updatePost", formData);
+            this.$store.dispatch("posts/updatePost", formData);
         },
         saveImg(event) {
             this.fields.image = event.target.files[0];

@@ -5,22 +5,11 @@ export const posts = {
     namespaced: true,
     state: {
         posts: [],
-        detailPostComments: [],
-        comments: [],
         categories: []
     },
     mutations: {
         SET_POSTS(state, payload) {
             state.posts = payload;
-        },
-        SET_UPDATE_POST(state, payload) {
-            state.posts = payload;
-        },
-        SET_COMMENT(state, payload) {
-            state.comments = payload;
-        },
-        SET_POST_COMMENTS(state, payload) {
-            state.detailPostComments = payload;
         },
         SET_CATEGORIES(state, payload) {
             state.categories = payload;
@@ -58,7 +47,7 @@ export const posts = {
             axios
                 .post(`api/posts/${payload.getAll("id")[0]}`, payload)
                 .then(response => {
-                    commit("SET_UPDATE_POST", response.data.posts);
+                    commit("SET_POSTS", response.data.posts);
                     router.push({ name: "Home" });
                 });
         },
